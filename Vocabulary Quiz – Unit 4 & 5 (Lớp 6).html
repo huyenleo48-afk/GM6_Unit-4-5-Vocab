@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulary Quiz – Unit 4 &amp; 5 (Lớp 6)</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6c3fd1; --purple2:#8b5cf6; --pink:#ff5fa2; --yellow:#ffd23f; --green:#2ecc71; --red:#ff5252; --blue:#3b9cff; --orange:#ff9f43;
+  --ink:#2d1b69;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Nunito',system-ui,sans-serif;color:var(--ink);min-height:100vh;
+  background:linear-gradient(160deg,#a78bfa 0%,#6c3fd1 45%,#ff5fa2 120%);
+  background-attachment:fixed;display:flex;justify-content:center;align-items:flex-start;padding:16px;overflow-x:hidden;
+}
+h1,h2,h3,.title{font-family:'Baloo 2','Nunito',sans-serif}
+.bubbles{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bubbles span{position:absolute;bottom:-80px;border-radius:50%;background:rgba(255,255,255,.14);animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-120vh)}}
+.app{position:relative;z-index:1;width:100%;max-width:760px}
+.card{background:#fff;border-radius:28px;padding:26px 22px;box-shadow:0 10px 0 rgba(45,27,105,.25),0 20px 40px rgba(0,0,0,.18)}
+.screen{display:none;animation:pop .35s ease}
+.screen.active{display:block}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+
+/* start */
+.hero{text-align:center}
+.mascot{font-size:72px;animation:bounce 1.6s ease-in-out infinite;display:inline-block}
+@keyframes bounce{50%{transform:translateY(-12px) rotate(-6deg)}}
+.hero h1{font-size:clamp(30px,7vw,44px);line-height:1.1;margin:6px 0;color:var(--purple)}
+.hero p.sub{font-weight:800;color:#7a6aa8;margin-bottom:18px}
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:#f1ebff;border-radius:999px;padding:8px 16px;font-weight:800;font-size:15px}
+input.name{width:100%;max-width:360px;padding:14px 18px;border-radius:18px;border:3px solid #d9ccff;font:800 18px 'Nunito';text-align:center;outline:none;color:var(--ink);margin-bottom:16px}
+input.name:focus{border-color:var(--purple2)}
+.modes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.mode{border:3px solid #d9ccff;background:#fff;border-radius:16px;padding:10px 16px;font:800 15px 'Nunito';cursor:pointer;color:var(--ink);transition:.15s}
+.mode.sel{background:var(--purple2);border-color:var(--purple2);color:#fff;transform:scale(1.05)}
+.btn{border:none;cursor:pointer;font:800 22px 'Baloo 2';color:#fff;padding:12px 34px;border-radius:20px;background:var(--green);box-shadow:0 6px 0 #1b9a50;transition:.1s}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 #1b9a50}
+.btn.pink{background:var(--pink);box-shadow:0 6px 0 #d63a80}
+.btn.pink:active{box-shadow:0 1px 0 #d63a80}
+.btn.blue{background:var(--blue);box-shadow:0 6px 0 #2273c9}
+.btn.blue:active{box-shadow:0 1px 0 #2273c9}
+
+/* play */
+.top{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.pill{background:#f1ebff;border-radius:999px;padding:6px 14px;font-weight:800;font-size:15px;white-space:nowrap}
+.pill.fire{background:#fff1d6}
+.grow{flex:1}
+.bar{height:16px;background:#ece5ff;border-radius:99px;overflow:hidden;margin-bottom:18px}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--pink));border-radius:99px;transition:width .4s}
+.qbox{background:linear-gradient(135deg,#f5f0ff,#fff0f7);border:3px dashed #cdbcff;border-radius:22px;padding:22px 16px;text-align:center;margin-bottom:18px}
+.qbox small{display:block;font-weight:800;color:#8a79bd;margin-bottom:6px;letter-spacing:.5px}
+.qbox .vn{font:800 clamp(26px,6vw,38px)/1.2 'Baloo 2';color:var(--purple)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.opts{grid-template-columns:1fr}}
+.opt{border:none;cursor:pointer;color:#fff;font:800 clamp(18px,4.5vw,22px) 'Baloo 2';padding:16px 14px;border-radius:20px;display:flex;align-items:center;gap:10px;text-align:left;transition:transform .1s,opacity .2s;min-height:68px}
+.opt .shape{font-size:22px;opacity:.9;flex:none;width:30px;text-align:center}
+.opt:nth-child(1){background:var(--red);box-shadow:0 6px 0 #c93636}
+.opt:nth-child(2){background:var(--blue);box-shadow:0 6px 0 #2273c9}
+.opt:nth-child(3){background:#f5b800;box-shadow:0 6px 0 #c28f00}
+.opt:nth-child(4){background:var(--green);box-shadow:0 6px 0 #1b9a50}
+.opt:not(:disabled):hover{transform:translateY(-3px)}
+.opt:not(:disabled):active{transform:translateY(4px)}
+.opt:disabled{cursor:default}
+.opt.correct{outline:6px solid #fff;box-shadow:0 0 0 10px var(--green);animation:yay .5s}
+.opt.wrong{animation:shake .45s;opacity:.55}
+.opt.dim{opacity:.35}
+@keyframes yay{50%{transform:scale(1.06)}}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.feedback{margin-top:16px;border-radius:18px;padding:12px 16px;font-weight:800;font-size:18px;text-align:center;display:none}
+.feedback.ok{display:block;background:#dcfbe8;color:#14804a}
+.feedback.no{display:block;background:#ffe3e3;color:#b32d2d}
+.next{display:none;margin:14px auto 0}
+.next.show{display:block}
+
+/* result */
+.result{text-align:center}
+.trophy{font-size:80px;animation:bounce 1.4s infinite;display:inline-block}
+.result h2{font-size:32px;color:var(--purple)}
+.score{font:800 64px 'Baloo 2';color:var(--pink);line-height:1}
+.score small{font-size:30px;color:#8a79bd}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.stat{border-radius:18px;padding:10px 18px;font-weight:800}
+.stat.g{background:#dcfbe8;color:#14804a}.stat.r{background:#ffe3e3;color:#b32d2d}.stat.y{background:#fff1d6;color:#a86a00}
+.stars{font-size:42px;margin-bottom:6px;letter-spacing:4px}
+.review{text-align:left;margin:16px 0;max-height:300px;overflow:auto;border-radius:18px;background:#faf7ff;padding:10px}
+.review h3{font-size:18px;margin:4px 6px 8px;color:var(--purple)}
+.ri{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:12px;margin-bottom:6px;font-weight:800;font-size:15px}
+.ri.ok{background:#e9fbf0}.ri.no{background:#fff0f0}
+.ri .en{color:var(--purple)}
+.ri .vi{color:#6b5b99;font-weight:600;text-align:right}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.btn.small{font-size:18px;padding:10px 22px}
+.confetti{position:fixed;top:-20px;width:10px;height:14px;z-index:5;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+.mute{position:fixed;right:14px;bottom:14px;z-index:6;border:none;background:#fff;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.2)}
+</style>
+</head>
+<body>
+<div class="bubbles" id="bubbles"></div>
+<button class="mute" id="mute" title="Bật/tắt âm thanh">🔊</button>
+
+<div class="app">
+
+  <!-- START -->
+  <section class="screen active card" id="start">
+    <div class="hero">
+      <div class="mascot">🦉</div>
+      <h1>Vocabulary Quiz</h1>
+      <p class="sub">Unit 4: My Neighbourhood &nbsp;•&nbsp; Unit 5: Natural Wonders of Viet Nam</p>
+      <div class="chips">
+        <span class="chip">📚 40 từ vựng</span>
+        <span class="chip">🎯 4 đáp án</span>
+        <span class="chip">⭐ Điểm thưởng liên tiếp</span>
+      </div>
+      <input class="name" id="playerName" maxlength="20" placeholder="Nhập tên của bạn…" autocomplete="off">
+      <button class="btn" id="startBtn">▶ Bắt đầu!</button>
+      <p style="margin-top:16px;font-weight:700;color:#7a6aa8;font-size:14px">Đọc nghĩa tiếng Việt, chọn từ tiếng Anh đúng nhé!</p>
+    </div>
+  </section>
+
+  <!-- PLAY -->
+  <section class="screen card" id="play">
+    <div class="top">
+      <span class="pill" id="qnum">Câu 1/40</span>
+      <span class="grow"></span>
+      <span class="pill fire" id="streak">🔥 0</span>
+      <span class="pill" id="pts">⭐ 0</span>
+    </div>
+    <div class="bar"><div id="prog"></div></div>
+    <div class="qbox">
+      <small>NGHĨA TIẾNG VIỆT LÀ…</small>
+      <div class="vn" id="vn">—</div>
+    </div>
+    <div class="opts" id="opts"></div>
+    <div class="feedback" id="fb"></div>
+    <button class="btn blue next" id="nextBtn">Câu tiếp theo ➜</button>
+  </section>
+
+  <!-- RESULT -->
+  <section class="screen card" id="end">
+    <div class="result">
+      <div class="trophy" id="trophy">🏆</div>
+      <h2 id="endTitle">Hoàn thành!</h2>
+      <p id="endMsg" style="font-weight:800;color:#7a6aa8;margin-bottom:6px"></p>
+      <div class="stars" id="stars"></div>
+      <div class="score"><span id="sc">0</span><small>/<span id="tot">40</span></small></div>
+      <p style="font-weight:800;color:#8a79bd">câu trả lời đúng</p>
+      <div class="stats">
+        <span class="stat g" id="stG">✅ 0 đúng</span>
+        <span class="stat r" id="stR">❌ 0 sai</span>
+        <span class="stat y" id="stY">⭐ 0 điểm</span>
+        <span class="stat y" id="stS">🔥 Chuỗi dài nhất: 0</span>
+      </div>
+      <div class="review" id="review"></div>
+      <div class="actions">
+        <button class="btn pink small" id="retryWrong">🔁 Ôn lại câu sai</button>
+        <button class="btn small" id="again">🎮 Chơi lại</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const WORDS = [
+ // Unit 4
+ ["antique shop","cửa hàng đồ cổ",4],["art gallery","phòng triển lãm nghệ thuật",4],["backyard","sân sau",4],["bakery","tiệm bánh",4],
+ ["barber","thợ cắt tóc",4],["beauty salon","tiệm làm đẹp",4],["boring","tẻ nhạt",4],["bus stop","trạm xe buýt",4],
+ ["cathedral","nhà thờ lớn",4],["cemetery","nghĩa trang",4],["charity shop","cửa hàng từ thiện",4],["comfortable","thoải mái",4],
+ ["convenient","thuận tiện",4],["countryside","vùng quê, nông thôn",4],["crowded","đông đúc",4],["department store","cửa hàng bách hóa",4],
+ ["dress shop","cửa hàng váy",4],["exciting","thú vị, sôi động",4],["expensive","đắt đỏ",4],["fantastic","tuyệt vời, thú vị",4],
+ // Unit 5
+ ["activity","hoạt động",5],["attraction","sự hấp dẫn; điểm tham quan",5],["backpack","ba lô đeo lưng",5],["bay","vịnh",5],
+ ["coast","bờ biển",5],["compass","la bàn",5],["cuisine","ẩm thực",5],["dangerous","nguy hiểm",5],
+ ["desert","sa mạc",5],["diverse","đa dạng",5],["essential","thiết yếu, quan trọng",5],["forest","khu rừng",5],
+ ["freshwater","nước ngọt",5],["freshwater lake","hồ nước ngọt",5],["island","hòn đảo",5],["mountain range","dãy núi",5],
+ ["natural wonder","kỳ quan thiên nhiên",5],["nature","thiên nhiên",5],["necessary","cần thiết",5],["painkiller","thuốc giảm đau",5]
+].map(([en,vi,u])=>({en,vi,u}));
+
+// Các cặp từ có nghĩa gần nhau -> không đặt chung làm đáp án nhiễu
+const CONFLICT = [["exciting","fantastic"],["essential","necessary"],["nature","natural wonder"],["freshwater","freshwater lake"],["cathedral","cemetery"]];
+const conflicts = (a,b)=>CONFLICT.some(p=>p.includes(a)&&p.includes(b));
+
+const $ = id=>document.getElementById(id);
+const shuffle = a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const SHAPES=["▲","◆","●","■"];
+
+let mode="all", queue=[], idx=0, right=0, points=0, streak=0, best=0, answered=false, log=[], player="";
+let soundOn=true, ctx=null;
+
+/* ---------- sound (WebAudio, chỉ phát sau khi bấm) ---------- */
+function tone(freqs,dur=.14,type="sine",vol=.18){
+  if(!soundOn)return;
+  try{
+    ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+    let t=ctx.currentTime;
+    freqs.forEach((f,i)=>{
+      const o=ctx.createOscillator(),g=ctx.createGain();
+      o.type=type;o.frequency.value=f;o.connect(g);g.connect(ctx.destination);
+      g.gain.setValueAtTime(vol,t+i*dur);g.gain.exponentialRampToValueAtTime(.001,t+(i+1)*dur);
+      o.start(t+i*dur);o.stop(t+(i+1)*dur+.02);
+    });
+  }catch(e){}
+}
+const sndOk=()=>tone([660,880,1100]), sndNo=()=>tone([220,160],.2,"sawtooth",.12), sndWin=()=>tone([523,659,784,1047,784,1047],.15);
+$("mute").onclick=()=>{soundOn=!soundOn;$("mute").textContent=soundOn?"🔊":"🔇"};
+
+/* ---------- bubbles ---------- */
+(function(){const b=$("bubbles");for(let i=0;i<16;i++){const s=document.createElement("span"),z=20+Math.random()*70;
+ s.style.cssText=`left:${Math.random()*100}%;width:${z}px;height:${z}px;animation-duration:${10+Math.random()*14}s;animation-delay:${-Math.random()*20}s`;b.appendChild(s)}})();
+
+/* ---------- screens ---------- */
+function show(id){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));$(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
+
+function pool(){return WORDS}
+
+function startGame(list){
+  queue=shuffle(list||pool());idx=0;right=0;points=0;streak=0;best=0;log=[];
+  show("play");render();
+}
+
+function makeOptions(w){
+  const same=WORDS.filter(x=>x!==w&&x.u===w.u&&!conflicts(x.en,w.en));
+  const other=WORDS.filter(x=>x!==w&&x.u!==w.u&&!conflicts(x.en,w.en));
+  // ưu tiên đáp án nhiễu cùng Unit, thêm 1 từ khác Unit cho đa dạng
+  const picks=[...shuffle(same).slice(0,2),...shuffle(other).slice(0,1)];
+  return shuffle([w,...picks]);
+}
+
+function render(){
+  answered=false;
+  const w=queue[idx];
+  $("qnum").textContent=`Câu ${idx+1}/${queue.length}`;
+  $("prog").style.width=(idx/queue.length*100)+"%";
+  $("streak").textContent="🔥 "+streak;
+  $("pts").textContent="⭐ "+points;
+  $("vn").textContent=w.vi;
+  $("fb").className="feedback";$("fb").textContent="";
+  $("nextBtn").classList.remove("show");
+  const box=$("opts");box.innerHTML="";
+  makeOptions(w).forEach((o,i)=>{
+    const b=document.createElement("button");b.className="opt";
+    b.innerHTML=`<span class="shape">${SHAPES[i]}</span><span>${o.en}</span>`;
+    b.onclick=()=>choose(b,o,w);
+    box.appendChild(b);
+  });
+}
+
+function choose(btn,o,w){
+  if(answered)return;answered=true;
+  const ok=o===w;
+  document.querySelectorAll(".opt").forEach(b=>{
+    b.disabled=true;
+    const txt=b.querySelector("span:last-child").textContent;
+    if(txt===w.en)b.classList.add("correct");
+    else if(b===btn)b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  const fb=$("fb");
+  if(ok){
+    right++;streak++;best=Math.max(best,streak);
+    const gain=100+Math.min(streak-1,5)*20;points+=gain;
+    fb.className="feedback ok";
+    fb.textContent=`🎉 Chính xác! +${gain} điểm`+(streak>=3?`  🔥 Chuỗi ${streak}!`:"");
+    sndOk();
+  }else{
+    streak=0;
+    fb.className="feedback no";
+    fb.innerHTML=`😅 Chưa đúng rồi! Đáp án: <u>${w.en}</u>`;
+    sndNo();
+  }
+  log.push({w,ok});
+  $("streak").textContent="🔥 "+streak;$("pts").textContent="⭐ "+points;
+  $("prog").style.width=((idx+1)/queue.length*100)+"%";
+  const nb=$("nextBtn");nb.textContent=idx===queue.length-1?"Xem kết quả 🏆":"Câu tiếp theo ➜";nb.classList.add("show");
+  nb.focus({preventScroll:true});
+}
+
+$("nextBtn").onclick=()=>{idx++;idx<queue.length?render():finish()};
+
+function finish(){
+  show("end");
+  const n=queue.length,pct=right/n,wrong=n-right;
+  $("sc").textContent=right;$("tot").textContent=n;
+  $("stG").textContent=`✅ ${right} đúng`;$("stR").textContent=`❌ ${wrong} sai`;
+  $("stY").textContent=`⭐ ${points} điểm`;$("stS").textContent=`🔥 Chuỗi dài nhất: ${best}`;
+  const stars=pct>=.9?3:pct>=.7?2:pct>=.5?1:0;
+  $("stars").textContent="⭐".repeat(stars)+"☆".repeat(3-stars);
+  const name=player||"bạn";
+  let t,m,tr;
+  if(pct===1){t="Hoàn hảo!";m=`Tuyệt vời ${name}! Bạn trả lời đúng tất cả!`;tr="🏆"}
+  else if(pct>=.9){t="Xuất sắc!";m=`Giỏi quá ${name}! Chỉ cần thêm một chút nữa là tuyệt đối.`;tr="🥇"}
+  else if(pct>=.7){t="Làm tốt lắm!";m=`${name} đã nhớ khá nhiều từ rồi. Ôn lại vài từ sai nhé!`;tr="🥈"}
+  else if(pct>=.5){t="Cố lên nào!";m=`${name} đang tiến bộ. Hãy ôn lại các từ sai bên dưới nhé!`;tr="🥉"}
+  else{t="Đừng nản nhé!";m=`${name} hãy luyện thêm, lần sau sẽ tốt hơn!`;tr="💪"}
+  $("endTitle").textContent=t;$("endMsg").textContent=m;$("trophy").textContent=tr;
+  $("retryWrong").style.display=wrong?"":"none";
+
+  const wrongs=log.filter(x=>!x.ok),rights=log.filter(x=>x.ok);
+  const rv=$("review");rv.innerHTML="";
+  const sec=(title,arr,cls)=>{if(!arr.length)return;const h=document.createElement("h3");h.textContent=title;rv.appendChild(h);
+    arr.forEach(x=>{const d=document.createElement("div");d.className="ri "+cls;d.innerHTML=`<span class="en">${x.w.en}</span><span class="vi">${x.w.vi}</span>`;rv.appendChild(d)})};
+  sec(`❌ Cần ôn lại (${wrongs.length})`,wrongs,"no");
+  sec(`✅ Đã nhớ (${rights.length})`,rights,"ok");
+
+  if(pct>=.5){sndWin();confetti(pct>=.9?120:60)}
+}
+
+function confetti(n){
+  const cols=["#ff5fa2","#ffd23f","#2ecc71","#3b9cff","#8b5cf6","#ff9f43"];
+  for(let i=0;i<n;i++){
+    const c=document.createElement("i");c.className="confetti";
+    c.style.cssText=`left:${Math.random()*100}vw;background:${cols[i%cols.length]};animation-duration:${2+Math.random()*2.5}s;animation-delay:${Math.random()*.8}s;border-radius:${Math.random()>.5?"50%":"2px"}`;
+    document.body.appendChild(c);setTimeout(()=>c.remove(),5500);
+  }
+}
+
+$("startBtn").onclick=()=>{player=$("playerName").value.trim();startGame()};
+$("playerName").addEventListener("keydown",e=>{if(e.key==="Enter")$("startBtn").click()});
+$("again").onclick=()=>show("start");
+$("retryWrong").onclick=()=>{startGame(log.filter(x=>!x.ok).map(x=>x.w))};
+</script>
+</body>
+</html>
